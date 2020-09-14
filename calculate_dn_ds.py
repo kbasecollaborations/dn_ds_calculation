@@ -35,5 +35,33 @@ with open("sample.fa") as fp:
           seq = seq + line
        line = fp.readline()
 
-print(get_triplets(seq))
+codonlist = get_triplets(seq)
 
+
+'''Calculating N and S for reference genome '''
+N = 0
+S = 0
+
+for codon in codonlist:
+    N1 = mutation_codon_data[codon+"_N_1"]
+    N2 = mutation_codon_data[codon+"_N_2"]
+    N3 = mutation_codon_data[codon+"_N_3"]
+    S1 = mutation_codon_data[codon+"_S_1"]
+    S2 = mutation_codon_data[codon+"_S_2"]
+    S3 = mutation_codon_data[codon+"_S_3"]    
+    N = N + (N1 + N2 + N3)
+    S = S + (S1 + S2 + S3)
+
+print(N)
+print(S)
+
+
+
+'''Calculating Nd and Sd for input vcf file
+with open("input.vcf") as fvp:
+    vcfline = fvp.readline()
+    while vcfline:
+       if not vcfline.startswith("#"):
+          vcfline = vcfline.strip()
+       fine = fvp.readline()
+'''
